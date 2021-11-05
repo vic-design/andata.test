@@ -1,0 +1,12 @@
+{
+    "name": "vic-design/andata.test",
+    "description": "test task",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Vic",
+            "email": "vic.krokhin@gmail.com"
+        }
+    ],
+    "require": {}
+}
