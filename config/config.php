@@ -11,6 +11,8 @@ define('APP_ROOT', dirname(__FILE__, 2));
 define('URL_ROOT', '/');
 define('URL_SUB_FOLDER', '');
 define('MIGRATIONS_DIR', '/database/migrations/');
+define('VIEWS_DIR', '/views');
+define('LAYOUT_DIR', '/layout');
 
 //db
 define('DB_HOST', '127.0.0.1');
