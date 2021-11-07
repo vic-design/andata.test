@@ -15,6 +15,7 @@ class Router
 {
     public function __invoke(RouteCollection $routes)
     {
+        //get contents and set params from request
         $context = new RequestContext();
         $context->fromRequest(Request::createFromGlobals());
 
@@ -23,6 +24,7 @@ class Router
         try {
             $matcher = $matcher->match($_SERVER['REQUEST_URI']);
 
+            // set string params as int
             array_walk($matcher, function (&$param) {
                 if (is_numeric($param)) {
                     $param = (int)$param;
@@ -32,8 +34,10 @@ class Router
             $className = '\\App\\Controllers\\' . $matcher['controller'];
             $classInstance = new $className();
 
+            // merge params with routes to show
             $params = array_merge(array_slice($matcher, 2, -1), ['routes' => $routes]);
 
+            // run needed method
             call_user_func_array([$classInstance, $matcher['method']], $params);
 
         } catch (MethodNotAllowedException $e) {

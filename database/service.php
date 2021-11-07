@@ -1,4 +1,5 @@
 <?php
+// add eloquent as ORM
 $capsule = new Illuminate\Database\Capsule\Manager();
 
 $capsule->addConnection([
@@ -12,6 +13,7 @@ $capsule->addConnection([
 $capsule->setAsGlobal();
 $capsule->bootEloquent();
 
+//run migrations if tables not exists
 foreach (glob(APP_ROOT . MIGRATIONS_DIR . "*.php") as $filename) {
     require_once $filename;
 }

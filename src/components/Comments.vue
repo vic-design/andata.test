@@ -58,14 +58,14 @@ export default {
         title: null,
         text: null,
       },
-      // name: null,
-      // email: null,
-      // title: null,
-      // text: null,
-      name: 'Name',
-      email: 'email@some.com',
-      title: 'title',
-      text: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium',
+      name: null,
+      email: null,
+      title: null,
+      text: null,
+      // name: 'Name',
+      // email: 'email@some.com',
+      // title: 'title',
+      // text: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium',
     }
   },
 
@@ -84,9 +84,22 @@ export default {
         data.append('title', this.title);
         data.append('text', this.text);
         axios.post('/comments', data).then((data) => {
-          this.commentsList = data.data;
           console.log(data)
+          if(!data.data.errors) {
+            this.clearErrors();
+            this.commentsList = data.data;
+          }
+          else
+            for(let error in data.data.errors) {
+              this.errors[error] = {text: data.data.errors[error]};
+            }
         });
+      }
+    },
+
+    clearErrors: function () {
+      for(let error in this.errors) {
+        this.errors[error] = null;
       }
     },
 
